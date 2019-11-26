@@ -8,31 +8,38 @@ import (
 
 var Stdout io.Writer = os.Stdout
 
-func Print(err error) func(...interface{}) int {
+func Print(err *error) func(...interface{}) int {
 	fprint := Fprint(err)
 	return func(args ...interface{}) int {
 		return fprint(Stdout, args...)
 	}
 }
 
-func Fprint(err error) func(io.Writer, ...interface{}) int {
+func Fprint(err *error) func(io.Writer, ...interface{}) int {
 	return func(w io.Writer, args ...interface{}) int {
 		if err != nil {
 			return 0
 		}
-		var n int
-		n, err = fmt.Fprint(w, args...)
+		n, e := fmt.Fprint(w, args...)
+		err = &e
 		return n
 	}
 }
 
-func Printf(err error) func(string, ...interface{}) int {
+func Printf(err *error) func(string, ...interface{}) int {
+	fprintf := Fprintf(err)
 	return func(format string, args ...interface{}) int {
+		return fprintf(Stdout, format, args...)
+	}
+}
+
+func Fprintf(err *error) func(io.Writer, string, ...interface{}) int {
+	return func(w io.Writer, format string, args ...interface{}) int {
 		if err != nil {
 			return 0
 		}
-		var n int
-		n, err = fmt.Fprintf(Stdout, format, args...)
+		n, e := fmt.Fprintf(w, format, args...)
+		err = &e
 		return n
 	}
 }

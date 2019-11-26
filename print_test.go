@@ -8,7 +8,7 @@ import (
 )
 
 func Test_Print(t *testing.T) {
-	var err error
+	var err *error
 	print := Print(err)
 	print("anything")
 
@@ -18,27 +18,31 @@ func Test_Print(t *testing.T) {
 	printf := Printf(err)
 	printf("Hello, %s!", "nexus")
 
+	fprintf := Fprintf(err)
+	fprintf(ioutil.Discard, "Hello, %s!", "nexus")
+
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func Test_Print_fails(t *testing.T) {
-	err := fmt.Errorf("failed")
 	buf := bytes.NewBufferString("")
 	Stdout = buf
 
+	var err *error
 	print := Print(err)
+	print("ok")
+
+	e := fmt.Errorf("failed")
+	err = &e
 	print("x")
 
 	printf := Printf(err)
 	printf("%s", "x")
 
-	if err == nil {
-		t.Error(err)
-	}
 	got := buf.String()
-	if got != "" {
+	if got != "ok" {
 		t.Error(got)
 	}
 }
