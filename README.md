@@ -11,12 +11,12 @@ Primary use of [nexus pattern](https://www.7de.se/go-learn/SE/nexus_pattern.html
     go get github.com/gregoryv/nexus
 
     func RenderSomething(w io.Writer) error {
-	    var err *error
-	    print := nexus.Print(w, err)
-		print("My long")
-		print("text")
+        var err *error
+        print := nexus.Print(w, err)
+    	print("My long")
+    	print("text")
 
-		printf := nexus.Printf(err)
-		printf("Hello, %s", "World")
-		return *err
-	}
+    	printf := nexus.Printf(err)
+    	printf("Hello, %s", "World")
+    	return *err
+    }
