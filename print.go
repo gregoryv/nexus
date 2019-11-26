@@ -43,3 +43,21 @@ func Fprintf(err *error) func(io.Writer, string, ...interface{}) int {
 		return n
 	}
 }
+
+func Println(err *error) func(...interface{}) int {
+	fprintln := Fprintln(err)
+	return func(args ...interface{}) int {
+		return fprintln(Stdout, args...)
+	}
+}
+
+func Fprintln(err *error) func(io.Writer, ...interface{}) int {
+	return func(w io.Writer, args ...interface{}) int {
+		if err != nil {
+			return 0
+		}
+		n, e := fmt.Fprintln(w, args...)
+		err = &e
+		return n
+	}
+}

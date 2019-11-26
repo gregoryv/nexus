@@ -7,10 +7,20 @@ import (
 	"testing"
 )
 
+func init() {
+	Stdout = ioutil.Discard
+}
+
 func Test_Print(t *testing.T) {
 	var err *error
 	print := Print(err)
 	print("anything")
+
+	println := Println(err)
+	println("line")
+
+	fprintln := Fprintln(err)
+	fprintln(ioutil.Discard, "line")
 
 	fprint := Fprint(err)
 	fprint(ioutil.Discard, "Hello", "nexus!")
@@ -37,6 +47,9 @@ func Test_Print_fails(t *testing.T) {
 	e := fmt.Errorf("failed")
 	err = &e
 	print("x")
+
+	println := Println(err)
+	println("ln")
 
 	printf := Printf(err)
 	printf("%s", "x")
