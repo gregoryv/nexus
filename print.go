@@ -25,3 +25,14 @@ func Fprint(err error) func(io.Writer, ...interface{}) int {
 		return n
 	}
 }
+
+func Printf(err error) func(string, ...interface{}) int {
+	return func(format string, args ...interface{}) int {
+		if err != nil {
+			return 0
+		}
+		var n int
+		n, err = fmt.Fprintf(Stdout, format, args...)
+		return n
+	}
+}

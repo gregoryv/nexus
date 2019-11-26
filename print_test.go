@@ -13,7 +13,10 @@ func Test_Print(t *testing.T) {
 	print("anything")
 
 	fprint := Fprint(err)
-	fprint(ioutil.Discard, "%s", "hello")
+	fprint(ioutil.Discard, "Hello", "nexus!")
+
+	printf := Printf(err)
+	printf("Hello, %s!", "nexus")
 
 	if err != nil {
 		t.Error(err)
@@ -22,10 +25,15 @@ func Test_Print(t *testing.T) {
 
 func Test_Print_fails(t *testing.T) {
 	err := fmt.Errorf("failed")
-	print := Print(err)
 	buf := bytes.NewBufferString("")
 	Stdout = buf
-	print("nothing")
+
+	print := Print(err)
+	print("x")
+
+	printf := Printf(err)
+	printf("%s", "x")
+
 	if err == nil {
 		t.Error(err)
 	}
