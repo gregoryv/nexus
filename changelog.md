@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Type Printer wrapping a writer
 
+### Changed
+
+- Removed specific print funcs
+
 ## [0.1.0] - 2019-11-26
 ### Added
 
