@@ -3,10 +3,26 @@ package nexus
 import (
 	"bytes"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 )
+
+func TestPrinter_Written(t *testing.T) {
+	w, _ := NewPrinter(ioutil.Discard)
+	w.Print(1)
+	w.Print(2)
+	exp := 2
+	if w.Written != exp {
+		t.Errorf("Got %v, expected %v", w.Written, exp)
+	}
+	w.err = fmt.Errorf("failed")
+	w.Print(3)
+	if w.Written != exp {
+		t.Errorf("After error got %v, expected %v", w.Written, exp)
+	}
+}
 
 func TestPrinter(t *testing.T) {
 	buf := bytes.NewBufferString("")

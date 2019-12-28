@@ -15,6 +15,8 @@ func NewPrinter(w io.Writer) (*Printer, *error) {
 type Printer struct {
 	w   io.Writer
 	err error
+	// Total number of bytes written
+	Written int
 }
 
 // Print prints arguments using the underlying writer. Does nothing if
@@ -23,7 +25,9 @@ func (t *Printer) Print(args ...interface{}) {
 	if t.err != nil {
 		return
 	}
-	_, t.err = fmt.Fprint(t.w, args...)
+	var n int
+	n, t.err = fmt.Fprint(t.w, args...)
+	t.Written += n
 }
 
 // Printf prints a formated string using the underlying writer. Does
@@ -32,7 +36,9 @@ func (t *Printer) Printf(format string, args ...interface{}) {
 	if t.err != nil {
 		return
 	}
-	_, t.err = fmt.Fprintf(t.w, format, args...)
+	var n int
+	n, t.err = fmt.Fprintf(t.w, format, args...)
+	t.Written += n
 }
 
 // Println prints arguments using the underlying writer. Does nothing if
@@ -41,7 +47,9 @@ func (t *Printer) Println(args ...interface{}) {
 	if t.err != nil {
 		return
 	}
-	_, t.err = fmt.Fprintln(t.w, args...)
+	var n int
+	n, t.err = fmt.Fprintln(t.w, args...)
+	t.Written += n
 }
 
 // Write writes the bytes using the underlying writer. Does nothing if
@@ -50,5 +58,8 @@ func (t *Printer) Write(b []byte) (int, error) {
 	if t.err != nil {
 		return 0, t.err
 	}
-	return t.w.Write(b)
+	var n int
+	n, t.err = t.w.Write(b)
+	t.Written += n
+	return n, t.err
 }
