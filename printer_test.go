@@ -13,7 +13,7 @@ func TestPrinter_Written(t *testing.T) {
 	w, _ := NewPrinter(ioutil.Discard)
 	w.Print(1)
 	w.Print(2)
-	exp := 2
+	exp := int64(2)
 	if w.Written != exp {
 		t.Errorf("Got %v, expected %v", w.Written, exp)
 	}
