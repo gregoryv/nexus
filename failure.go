@@ -5,7 +5,7 @@ type Failure struct {
 }
 
 // Fail sets the given error unless already failed. An error can only be set once.
-func (me Failure) Fail(err error) error {
+func (me *Failure) Fail(err error) error {
 	if me.err != nil {
 		return me.err
 	}
@@ -14,4 +14,4 @@ func (me Failure) Fail(err error) error {
 }
 
 // Ok return true if no error is set.
-func (me Failure) Ok() bool { return me.err == nil }
+func (me *Failure) Ok() bool { return me.err == nil }
