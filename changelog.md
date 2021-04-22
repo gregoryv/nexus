@@ -1,34 +1,26 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
+This project adheres to semantic versioning.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
-## [unreleased]
+## [0.5.0] - 2021-04-22
 
 - Add type Stepper
 - Add type Failure
 
 ## [0.4.0] - 2020-02-08
-### Added
 
-- Func First, selecting first error
+- Add Func First, selecting first error
 
 ## [0.3.0] - 2019-12-31
-### Changed
 
 - Printer.Written type changed to int64
 
 ## [0.2.0] - 2019-12-28
-### Added
 
-- Type Printer wrapping a writer
-
-### Changed
-
-- Removed specific print funcs
+- Add Type Printer wrapping a writer
+- Remove specific print funcs
 
 ## [0.1.0] - 2019-11-26
-### Added
 
-- Print, Println, Printf, Fprintf and Fprintln
+- Add Print, Println, Printf, Fprintf and Fprintln
