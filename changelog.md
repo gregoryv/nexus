@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to semantic versioning.
 
+## [0.5.1] - 2021-04-22
+
+- Add MIT license
+
 ## [0.5.0] - 2021-04-22
 
 - Add type Stepper
