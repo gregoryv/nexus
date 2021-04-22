@@ -18,6 +18,29 @@ at the first error.
   p.Printf("Hello, %s", "World")
   return *err
 
+Or a more complex sequence of steps
+
+  var (
+    src  = "input.txt"
+    dst  = "output.txt"
+    in   *os.File
+    out  *os.File
+    err  error
+    next = NewStepper(&err)
+  )
+
+  next.Step(func() {
+    in, err = os.Open(src)
+  })
+
+  next.Stepf("create: %w", func() {
+    out, err = os.Create(dst)
+  })
+
+  next.Stepf("copy: %w", func() {
+    _, err = io.Copy(out, in)
+  })
+
 One go idiom is to return the result of a function together with an
 error if one occured. It's a powerful idiom and works in most cases.
 When you are working with sequential flows however, the idiom is less
