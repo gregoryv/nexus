@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to semantic versioning.
 
+## [unreleased]
+
+- Add type Writer
+
 ## [0.5.1] - 2021-04-22
 
 - Add MIT license
