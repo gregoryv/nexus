@@ -20,11 +20,11 @@ func ExampleStepper() {
 		in, err = os.Open(src)
 	})
 
-	next.Stepf("create: %w", func() {
+	next.Stepf("create", func() {
 		out, err = os.Create(dst)
 	})
 
-	next.Stepf("copy: %w", func() {
+	next.Stepf("copy", func() {
 		_, err = io.Copy(out, in)
 	})
 
