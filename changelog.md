@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 
 ## [unreleased]
 
+- Bump year in license
 - Stepf takes format with optional %w for wrapping errors
 
 ## [0.6.0] - 2022-08-13
