@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to semantic versioning.
 
-## [unreleased]
+## [0.7.0] - 2024-02-14
 
 - Bump year in license
 - Stepf takes format with optional %w for wrapping errors
